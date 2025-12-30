@@ -28,3 +28,28 @@ struct EstimationResult {
 service StoryPointEstimator {
   EstimationResult estimate(1: Issue issue)
 }
+
+
+
+import { fetch } from '@forge/api';
+
+export async function run() {
+  const response = await fetch('https://api.example.com/data', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    return {
+      body: `Request failed: ${response.status}`
+    };
+  }
+
+  const data = await response.json();
+
+  return {
+    body: `Response from server: ${JSON.stringify(data)}`
+  };
+}
